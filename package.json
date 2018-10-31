@@ -1,0 +1,48 @@
+{
+  "name": "small-business-bids",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://arunmasc@bitbucket.org/arunmasc/small-business-bids.git",
+  "author": "Arun Mascarenhas <arunmascarenhas@yahoo.com>",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "src/js/*.js": [
+        "prettier-standard",
+        "git add"
+      ],
+      "src/markup/*.pug": [
+        "pug-lint",
+        "git add"
+      ],
+      "src/styles/*.css": [
+        "csslint",
+        "git add"
+      ]
+    }
+  },
+  "scripts": {
+    "lint:js": "prettier-standard \"src/**/*.js\"",
+    "lint:pug": "glob-exec \"./src/**/*.pug\" -- \"pug-lint {{files.join(' ')}}\"",
+    "lint:css": "csslint \"src/styles\"",
+    "lint": "npm run lint:js && npm run lint:pug && npm run lint:css",
+    "dev": "parcel \"src/markup/index.pug\"",
+    "build": "parcel build \"src/markup/index.pug\""
+  },
+  "devDependencies": {
+    "csslint": "^1.0.5",
+    "glob-exec": "^0.1.1",
+    "husky": "^1.1.2",
+    "lint-staged": "^8.0.2",
+    "parcel-bundler": "^1.10.3",
+    "prettier-standard": "^8.0.1",
+    "pug": "^2.0.3",
+    "pug-lint": "^2.5.0",
+    "pug-lint-config-clock": "^2.0.0"
+  }
+}
